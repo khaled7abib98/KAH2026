@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Khaled Habib | Graphic Designer</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                    },
+                    colors: {
+                        neonPink: '#ff007f',
+                        neonBlue: '#00f3ff',
+                        neonPurple: '#b026ff',
+                        darkBg: '#050505'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Three.js for 3D Background -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <style>
+        body {
+            background-color: #000;
+            color: #fff;
+            overflow-x: hidden;
+        }
+        
+        /* 3D Canvas Background */
+        #canvas-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            opacity: 0.6; /* Slight transparency so text is readable */
+        }
+
+        /* Cool Gradient Text */
+        .text-gradient {
+            background: linear-gradient(45deg, #00f3ff, #b026ff, #ff007f);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% auto;
+            animation: shine 3s linear infinite;
+        }
+
+        @keyframes shine {
+            to {
+                background-position: 200% center;
+            }
+        }
+
+        /* Glassmorphism Cards */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0, 243, 255, 0.2);
+            border-color: rgba(0, 243, 255, 0.5);
+        }
+
+        /* Glow effects for skills */
+        .glow-icon {
+            filter: drop-shadow(0 0 15px rgba(255, 0, 127, 0.8));
+            transition: filter 0.3s ease, transform 0.3s ease;
+        }
+        .glow-icon:hover {
+            filter: drop-shadow(0 0 25px rgba(0, 243, 255, 1));
+            transform: scale(1.1);
+        }
+
+        /* Scroll Reveal Animation Classes */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #000;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(to bottom, #b026ff, #ff007f);
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-neonPink selection:text-white">
+
+    <!-- 3D Interactive Background -->
+    <div id="canvas-container"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 transition-all duration-300 backdrop-blur-md bg-black/30 border-b border-white/10" id="navbar">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <!-- Logo Section -->
+            <a href="#" class="flex items-center gap-3 group">
+                <img src="LOGO KAH.png" alt="Khaled Logo" class="w-16 h-16 object-contain drop-shadow-[0_0_10px_rgba(255,255,255,0.3)] group-hover:rotate-12 transition-transform duration-300">
+                <span class="font-bold text-xl tracking-wider text-white group-hover:text-neonBlue transition-colors">Khaled Habib</span>
+            </a>
+            
+            <!-- Desktop Links -->
+            <div class="hidden md:flex gap-8 font-semibold text-sm tracking-wide">
+                <a href="#about" class="hover:text-neonPink transition-colors">About</a>
+                <a href="#specialization" class="hover:text-neonBlue transition-colors">Expertise</a>
+                <a href="#skills" class="hover:text-neonPurple transition-colors">Skills</a>
+                <a href="#portfolio" class="hover:text-neonPink transition-colors">Portfolio</a>
+            </div>
+
+            <!-- CTA Button -->
+            <a href="#contact" class="hidden md:inline-block px-6 py-2 rounded-full bg-transparent border-2 border-neonBlue text-neonBlue font-bold hover:bg-neonBlue hover:text-black hover:shadow-[0_0_20px_rgba(0,243,255,0.5)] transition-all">
+                Let's Talk
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative h-screen flex flex-col items-center justify-center text-center px-4 pt-20">
+        <div class="reveal">
+            <h2 class="text-neonBlue font-bold tracking-[0.2em] uppercase text-sm md:text-lg mb-4 animate-pulse">
+                Welcome to my creative universe
+            </h2>
+            <h1 class="text-5xl md:text-7xl lg:text-8xl font-black mb-6 leading-tight">
+                I AM A <br> 
+                <span class="text-gradient">GRAPHIC DESIGNER</span>
+            </h1>
+            <p class="text-gray-400 text-lg md:text-2xl max-w-2xl mx-auto font-light mb-10">
+                Elevate Your Brand with Design. I don't just create visuals, I create experiences that stick.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-6 justify-center items-center">
+                <a href="#portfolio" class="px-8 py-4 rounded-full bg-gradient-to-r from-neonPurple to-neonPink text-white font-bold text-lg hover:scale-105 hover:shadow-[0_0_30px_rgba(255,0,127,0.6)] transition-all flex items-center gap-3">
+                    <i class="fab fa-behance text-2xl"></i> View My Work
+                </a>
+                <a href="https://wa.me/201552309125" target="_blank" class="px-8 py-4 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white font-bold text-lg hover:bg-white/20 hover:border-neonBlue transition-all flex items-center gap-3">
+                    <i class="fab fa-whatsapp text-green-400 text-2xl"></i> +20 155 230 9125
+                </a>
+            </div>
+        </div>
+        
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-10 animate-bounce">
+            <i class="fas fa-chevron-down text-white/50 text-2xl"></i>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-24 px-6 relative z-10">
+        <div class="max-w-6xl mx-auto glass-card p-10 md:p-16 reveal">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-4xl md:text-5xl font-black mb-6 text-gradient">Who is Khaled?</h2>
+                    <p class="text-gray-300 text-lg leading-relaxed mb-6">
+                        I am a passionate Graphic Designer based in Egypt, driven by the desire to transform concepts into compelling visual stories. With a keen eye for aesthetics and a deep understanding of branding, I help businesses communicate their unique value.
+                    </p>
+                    <ul class="space-y-4 text-gray-400">
+                        <li class="flex items-center gap-3"><i class="fas fa-map-marker-alt text-neonPink"></i> <strong>Location:</strong> Menoufia, Egypt</li>
+                        <li class="flex items-center gap-3"><i class="fas fa-birthday-cake text-neonBlue"></i> <strong>Birthday:</strong> October 18</li>
+                        <li class="flex items-center gap-3"><i class="fas fa-envelope text-neonPurple"></i> <strong>Email:</strong> khaledamgadhabib@gmail.com</li>
+                    </ul>
+                </div>
+                <div class="relative group">
+                    <div class="absolute -inset-1 bg-gradient-to-r from-neonPink to-neonBlue rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
+                    <div class="relative w-full h-80 bg-gray-900 rounded-2xl border border-white/10 flex items-center justify-center overflow-hidden">
+                        <img src="5dOMS5684.jpg" alt="Khaled Habib Portrait" class="w-full h-full object-cover grayscale hover:grayscale-0 transition duration-500">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Specialization Section -->
+    <section id="specialization" class="py-24 px-6 relative z-10 bg-black/40">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-4xl md:text-6xl font-black mb-4">I Specialize In</h2>
+                <div class="h-1 w-24 bg-gradient-to-r from-neonBlue to-neonPink mx-auto rounded-full"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="glass-card p-8 text-center reveal" style="transition-delay: 100ms;">
+                    <div class="w-20 h-20 mx-auto bg-neonPink/10 rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-ad text-4xl text-neonPink"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Advertising</h3>
+                    <p class="text-gray-400">Creating eye-catching advertising materials that capture attention and drive conversions.</p>
+                </div>
+                <!-- Card 2 -->
+                <div class="glass-card p-8 text-center reveal" style="transition-delay: 200ms;">
+                    <div class="w-20 h-20 mx-auto bg-neonBlue/10 rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-fingerprint text-4xl text-neonBlue"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Branding</h3>
+                    <p class="text-gray-400">Building cohesive and memorable brand identities that resonate with your target audience.</p>
+                </div>
+                <!-- Card 3 -->
+                <div class="glass-card p-8 text-center reveal" style="transition-delay: 300ms;">
+                    <div class="w-20 h-20 mx-auto bg-neonPurple/10 rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-hashtag text-4xl text-neonPurple"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Social Media</h3>
+                    <p class="text-gray-400">Designing engaging social media graphics that boost your online presence and interaction.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Software Proficiency -->
+    <section id="skills" class="py-24 px-6 relative z-10">
+        <div class="max-w-5xl mx-auto text-center reveal">
+            <h2 class="text-4xl md:text-6xl font-black mb-4">Software Proficiency</h2>
+            <p class="text-gray-400 mb-16">The tools I use to bring imagination to reality.</p>
+            
+            <div class="flex flex-wrap justify-center gap-12 md:gap-24">
+                <!-- Photoshop -->
+                <div class="flex flex-col items-center gap-4 group">
+                    <div class="w-28 h-28 rounded-2xl bg-[#001E36] border border-[#31A8FF] flex items-center justify-center glow-icon relative overflow-hidden">
+                        <span class="text-[#31A8FF] text-4xl font-bold font-sans tracking-tighter">Ps</span>
+                        <div class="absolute inset-0 bg-[#31A8FF] opacity-0 group-hover:opacity-20 transition-opacity"></div>
+                    </div>
+                    <span class="text-xl font-semibold tracking-wider">Photoshop</span>
+                </div>
+                
+                <!-- Illustrator -->
+                <div class="flex flex-col items-center gap-4 group">
+                    <div class="w-28 h-28 rounded-2xl bg-[#330000] border border-[#FF9A00] flex items-center justify-center glow-icon relative overflow-hidden" style="filter: drop-shadow(0 0 15px rgba(255, 154, 0, 0.5));">
+                        <span class="text-[#FF9A00] text-4xl font-bold font-sans tracking-tighter">Ai</span>
+                        <div class="absolute inset-0 bg-[#FF9A00] opacity-0 group-hover:opacity-20 transition-opacity"></div>
+                    </div>
+                    <span class="text-xl font-semibold tracking-wider">Illustrator</span>
+                </div>
+
+                <!-- Lightroom -->
+                <div class="flex flex-col items-center gap-4 group">
+                    <div class="w-28 h-28 rounded-2xl bg-[#001E36] border border-[#31A8FF] flex items-center justify-center glow-icon relative overflow-hidden" style="filter: drop-shadow(0 0 15px rgba(49, 168, 255, 0.5));">
+                        <span class="text-[#31A8FF] text-4xl font-bold font-sans tracking-tighter">Lr</span>
+                        <div class="absolute inset-0 bg-[#31A8FF] opacity-0 group-hover:opacity-20 transition-opacity"></div>
+                    </div>
+                    <span class="text-xl font-semibold tracking-wider">Lightroom</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Call to Action -->
+    <section id="portfolio" class="py-24 px-6 relative z-10 bg-gradient-to-b from-transparent to-black/80 border-t border-white/5">
+        <div class="max-w-4xl mx-auto text-center glass-card p-12 reveal border-neonBlue/30">
+            <i class="fab fa-behance-square text-6xl text-blue-500 mb-6 drop-shadow-[0_0_15px_rgba(59,130,246,0.8)]"></i>
+            <h2 class="text-4xl md:text-5xl font-black mb-6">Discover My Masterpieces</h2>
+            <p class="text-gray-300 text-lg mb-10">
+                A picture is worth a thousand words. Dive into my Behance portfolio to see how I've elevated brands and created stunning visual narratives.
+            </p>
+            <a href="https://www.behance.net/khaled7abib" target="_blank" class="inline-block px-10 py-4 rounded-full bg-blue-600 text-white font-bold text-xl hover:bg-blue-500 hover:shadow-[0_0_30px_rgba(59,130,246,0.6)] hover:-translate-y-2 transition-all duration-300">
+                Explore Portfolio on Behance <i class="fas fa-arrow-right ml-2"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- Contact & Footer -->
+    <footer id="contact" class="bg-black py-16 px-6 border-t border-white/10 relative z-10">
+        <div class="max-w-6xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-12">
+                <div class="reveal">
+                    <h2 class="text-4xl font-black mb-4 text-gradient">Ready to Elevate Your Brand?</h2>
+                    <p class="text-gray-400 mb-8">Contact me to bring your vision to life! Let's discuss your next big project.</p>
+                    
+                    <div class="space-y-4">
+                        <a href="tel:+201098597273" class="flex items-center gap-4 group p-4 glass-card hover:bg-white/5">
+                            <div class="w-12 h-12 rounded-full bg-neonPurple/20 flex items-center justify-center text-neonPurple group-hover:bg-neonPurple group-hover:text-white transition-colors">
+                                <i class="fas fa-phone-alt text-xl"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-500">Call Me</p>
+                                <p class="font-bold tracking-wider">+20 109 859 7273</p>
+                            </div>
+                        </a>
+                        
+                        <a href="https://wa.me/201552309125" target="_blank" class="flex items-center gap-4 group p-4 glass-card hover:bg-white/5">
+                            <div class="w-12 h-12 rounded-full bg-green-500/20 flex items-center justify-center text-green-500 group-hover:bg-green-500 group-hover:text-white transition-colors">
+                                <i class="fab fa-whatsapp text-2xl"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-500">WhatsApp</p>
+                                <p class="font-bold tracking-wider">+20 155 230 9125</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="flex flex-col justify-center items-center md:items-end reveal" style="transition-delay: 200ms;">
+                    <h3 class="text-2xl font-bold mb-6">Connect With Me</h3>
+                    <div class="flex gap-6">
+                        <a href="https://www.linkedin.com/in/khaled-habib-b48740171/" target="_blank" class="w-16 h-16 rounded-full glass-card flex items-center justify-center text-3xl hover:text-[#0a66c2] hover:border-[#0a66c2] transition-colors">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="https://www.behance.net/khaled7abib" target="_blank" class="w-16 h-16 rounded-full glass-card flex items-center justify-center text-3xl hover:text-blue-500 hover:border-blue-500 transition-colors">
+                            <i class="fab fa-behance"></i>
+                        </a>
+                        <a href="mailto:khaledamgadhabib@gmail.com" class="w-16 h-16 rounded-full glass-card flex items-center justify-center text-3xl hover:text-neonPink hover:border-neonPink transition-colors">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center pt-8 border-t border-white/10 text-gray-600 font-light">
+                <p>&copy; 2024 Khaled Habib. All rights reserved. Designed with <i class="fas fa-heart text-neonPink mx-1"></i> & Passion.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/201552309125" target="_blank" class="fixed bottom-6 right-6 w-16 h-16 bg-green-500 rounded-full flex items-center justify-center text-white text-3xl shadow-[0_0_20px_rgba(34,197,94,0.5)] hover:scale-110 hover:shadow-[0_0_30px_rgba(34,197,94,0.8)] transition-all z-50">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Core Scripts -->
+    <script>
+        // --- 1. Scroll Reveal Animation ---
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 100;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+        window.addEventListener("scroll", reveal);
+        reveal(); // Trigger on load
+
+        // --- 2. Navbar Background on Scroll ---
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                nav.classList.add('shadow-lg');
+            } else {
+                nav.classList.remove('shadow-lg');
+            }
+        });
+
+        // --- 3. Three.js Interactive 3D Background ---
+        const container = document.getElementById('canvas-container');
+        const scene = new THREE.Scene();
+        
+        // Add subtle fog to blend objects into the background
+        scene.fog = new THREE.FogExp2(0x000000, 0.001);
+
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+        
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(window.devicePixelRatio);
+        container.appendChild(renderer.domElement);
+
+        // Create 3D Objects representing "Design elements"
+        const objects = [];
+        
+        // Colors from our Tailwind config
+        const colors = [0xff007f, 0x00f3ff, 0xb026ff];
+        
+        // Geometries
+        const geometries = [
+            new THREE.IcosahedronGeometry(1, 0),    // Abstract Low poly shape
+            new THREE.TorusGeometry(1, 0.3, 16, 100), // Ring/Torus
+            new THREE.OctahedronGeometry(1, 0),     // Diamond shape
+            new THREE.TetrahedronGeometry(1, 0)
+        ];
+
+        // Generate Random Objects
+        for (let i = 0; i < 40; i++) {
+            const geometry = geometries[Math.floor(Math.random() * geometries.length)];
+            
+            // Wireframe material for tech/design vibe
+            const material = new THREE.MeshBasicMaterial({ 
+                color: colors[Math.floor(Math.random() * colors.length)],
+                wireframe: true,
+                transparent: true,
+                opacity: 0.3 + Math.random() * 0.4
+            });
+
+            const mesh = new THREE.Mesh(geometry, material);
+            
+            // Random positions spread out
+            mesh.position.x = (Math.random() - 0.5) * 40;
+            mesh.position.y = (Math.random() - 0.5) * 40;
+            mesh.position.z = (Math.random() - 0.5) * 30 - 10;
+            
+            // Random rotation
+            mesh.rotation.x = Math.random() * Math.PI;
+            mesh.rotation.y = Math.random() * Math.PI;
+
+            // Store random rotation speed for animation
+            mesh.userData = {
+                rotationSpeedX: (Math.random() - 0.5) * 0.01,
+                rotationSpeedY: (Math.random() - 0.5) * 0.01,
+                originalY: mesh.position.y
+            };
+
+            scene.add(mesh);
+            objects.push(mesh);
+        }
+
+        camera.position.z = 15;
+
+        // Variables for interactivity
+        let mouseX = 0;
+        let mouseY = 0;
+        let targetX = 0;
+        let targetY = 0;
+
+        const windowHalfX = window.innerWidth / 2;
+        const windowHalfY = window.innerHeight / 2;
+
+        // Track Mouse
+        document.addEventListener('mousemove', (event) => {
+            mouseX = (event.clientX - windowHalfX) * 0.005;
+            mouseY = (event.clientY - windowHalfY) * 0.005;
+        });
+
+        // Animation Loop
+        function animate() {
+            requestAnimationFrame(animate);
+
+            // Smooth mouse movement for camera
+            targetX = mouseX * 2;
+            targetY = mouseY * 2;
+            
+            // Add scroll effect (Parallax)
+            const scrollY = window.scrollY;
+            
+            camera.position.x += (targetX - camera.position.x) * 0.05;
+            camera.position.y += (-targetY - camera.position.y) * 0.05;
+            camera.lookAt(scene.position);
+
+            // Rotate objects and apply parallax Y shifting
+            objects.forEach((obj, index) => {
+                obj.rotation.x += obj.userData.rotationSpeedX;
+                obj.rotation.y += obj.userData.rotationSpeedY;
+                
+                // Objects move vertically based on scroll. Closer objects move faster.
+                const parallaxFactor = (obj.position.z + 20) * 0.002;
+                obj.position.y = obj.userData.originalY + (scrollY * parallaxFactor);
+            });
+
+            renderer.render(scene, camera);
+        }
+
+        // Start animation when everything loads
+        window.onload = function() {
+            animate();
+        };
+
+        // Handle Window Resize
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+    </script>
+</body>
+</html>
